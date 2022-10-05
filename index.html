@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>UsersList</title>
     <link rel="stylesheet" href="./index.css" />
-    <script async src="./index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch-jsonp/1.0.6/fetch-jsonp.min.js"></script>
+    <script async src="./index.js"></script>
   </head>
   <body>
     <main class="content">
-      <section class="users-list">
+      <section id="users-list" class="users-list">
         <div class="row">
           <div class="column">
             <div class="user-box">
               <div class="box-content">
-                <img src="./spacepic.jpg" height=70" alt="" />
+                <img src="./spacepic.jpg" height=70 alt="" />
                 <div class="box-info">
                   <span>Name:</span>
                   <span>Email:</span>
@@ -31,6 +31,9 @@
           </div>
         </div>
       </section>
+      <div class="button-container">
+        <button onclick="Controller.bootstrap()" class="special-button">New Users</button>
+      </div>
     </main>
   </body>
 </html>
