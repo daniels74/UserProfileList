@@ -9,7 +9,7 @@ const Api = (() => {
 const View = (() => {
   const domstr = {
     usersList: "#users-list",
-    buttonOption: "#box-info",
+    boxInfo: "#box-info",
   };
   const render = (ele, tmp) => {
     ele.innerHTML = tmp;
@@ -18,7 +18,7 @@ const View = (() => {
     let tmp = "";
     let counter = 0;
     arr.forEach((ele) => {
-       console.log(ele[0].id.value)
+      //console.log(ele[0].id.value);
       if (counter === 0) {
         // Start a new row
         tmp += `<div class="row">`;
@@ -32,7 +32,7 @@ const View = (() => {
               <span>Name:${ele[0].name.first}</span>
               <span>Email:${ele[0].email}</span>
               <span>Phone:${ele[0].phone}</span>
-              <button id="${ele[0].id.value}" onclick="moreInfo()">More ${ele[0].name.first}</button>
+              <button id="${ele[0].id.name}" class="more-button" onclick="Controller.showMore(${ele[0].id.name})">More ${ele[0].name.first}</button>
             </div>
           </div>
         </div>
@@ -59,15 +59,6 @@ const View = (() => {
 
 const Model = ((api, view) => {
   const { getUsers } = api;
-
-  // const updateBox = () => {
-
-  //   const buttonHtml = document.querySelector(view.domstr.usersList);
-    
-    
-  //   const tmp = view.createTmp(this.#userslist);
-  //   view.render(userslistContainer, tmp);
-  // }
   class State {
     #userslist = [];
 
@@ -95,11 +86,7 @@ const Controller = ((model) => {
     for (let i = 0; i < 20; i++) {
       await model.getUsers().then((User) => theUsers.push(User.results));
     }
-
     state.Userlist = theUsers;
-    // theUsers.forEach((user) => {
-    //   state.Userlist.push(user);
-    // });
     console.log("state.userslist", state.Userlist);
   };
 
@@ -107,11 +94,16 @@ const Controller = ((model) => {
     init();
   };
 
-  return { bootstrap };
+  function showMore(ele){
+    console.log(ele.id)
+    state.Userlist.forEach((User)=>{
+      if(User[0].id.name === ele.id){
+        ele.outerHTML = `<div>DOB: ${User[0].dob.date}</div>`;
+      }
+    })
+  }
+
+  return { bootstrap, showMore };
 })(Model);
 
 Controller.bootstrap();
-
-function moreInfo() {
-  model.updateBox();
-}

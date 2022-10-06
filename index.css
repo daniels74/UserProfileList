@@ -53,12 +53,15 @@ html, body {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: stretch;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-left: 2rem;
  }
 
  .box-info {
     display: flex;
     flex-direction: column;
+    width: 100%;
  }
 
 .button-container {
@@ -93,4 +96,11 @@ html, body {
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: 70%;
+ }
+
+ .more-button{
+    position: relative;
+    background-color: #283153;
+    width: 50%;
+    border-style: none;
  }
